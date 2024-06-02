@@ -17,6 +17,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          git config --global http.postBuffer 524288000
 
       - name: Debug: List remotes
         run: git remote -v
@@ -37,5 +38,8 @@ jobs:
           # Debug: Verify remote
           git remote -v
           
-          # Force push to the main branch on Gitea
+          # Fetch from Gitea to ensure connection works
+          git fetch gitea
+
+          # Push to the main branch on Gitea
           git push gitea master:main --force
