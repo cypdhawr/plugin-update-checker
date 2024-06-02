@@ -67,8 +67,13 @@ jobs:
           # Debug: Verify remote
           git remote -v
           
+          # Check if the repository is shallow and unshallow if necessary
+          if [ -f .git/shallow ]; then
+            git fetch --unshallow
+          fi
+
           # Fetch full history from the remote
-          git fetch --unshallow gitea
+          git fetch gitea
 
           # Push to the main branch on Gitea
           git push gitea master:main --force
