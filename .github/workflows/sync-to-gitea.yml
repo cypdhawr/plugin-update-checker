@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Fetch all history for all branches and tags
+          fetch-depth: 1  # Fetch only the latest commit
 
       - name: Set up Git
         run: |
@@ -67,13 +67,8 @@ jobs:
           # Debug: Verify remote
           git remote -v
           
-          # Check if the repository is shallow and unshallow if necessary
-          if [ -f .git/shallow ]; then
-            git fetch --unshallow
-          fi
+          # Fetch only the latest commit from the remote
+          git fetch --depth=1 origin master
 
-          # Fetch full history from the remote
-          git fetch gitea
-
-          # Push to the main branch on Gitea
+          # Push the latest commit to the main branch on Gitea
           git push gitea master:main --force
