@@ -1,7 +1,7 @@
 Plugin Update Checker
 =====================
 
-# Testing Gitea Sync v6
+# Testing Gitea Sync v7
 This is a test change to verify the GitHub to Gitea sync.
 
 This is a custom update checker library for WordPress plugins and themes. It lets you add automatic update notifications and one-click upgrades to your commercial plugins, private themes, and so on. All you need to do is put your plugin/theme details in a JSON file, place the file on your server, and pass the URL to the library. The library periodically checks the URL to see if there's a new version available and displays an update notification to the user if necessary.
