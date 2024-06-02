@@ -374,3 +374,4 @@ Resources
 - [A GUI for entering download credentials](https://open-tools.net/documentation/tutorial-automatic-updates.html#wordpress)
 - [Theme Update Checker](https://w-shadow.com/blog/2011/06/02/automatic-updates-for-commercial-themes/) - an older, theme-only variant of this update checker.
 Test change to trigger workflow v4
+Test change to trigger workflow v5
