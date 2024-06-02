@@ -373,3 +373,4 @@ Resources
 - [Securing download links](https://w-shadow.com/blog/2013/03/19/plugin-updates-securing-download-links/) - a general overview.
 - [A GUI for entering download credentials](https://open-tools.net/documentation/tutorial-automatic-updates.html#wordpress)
 - [Theme Update Checker](https://w-shadow.com/blog/2011/06/02/automatic-updates-for-commercial-themes/) - an older, theme-only variant of this update checker.
+Test change to trigger workflow v4
