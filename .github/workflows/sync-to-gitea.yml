@@ -19,7 +19,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git config --global http.postBuffer 524288000
+          git config --global http.postBuffer 524288000  # Increase Git buffer size to 500MB
 
       - name: Debug - Print environment variables
         run: |
