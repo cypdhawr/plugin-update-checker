@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 1  # Fetch only the latest commit
 
       - name: Set up Git
         run: |
@@ -23,52 +21,49 @@ jobs:
 
       - name: Debug - Print environment variables
         run: |
-          echo "GITEA_URL=${{ secrets.GITEA_URL }}"
-          echo "GITEA_TOKEN=${{ secrets.GITEA_TOKEN }}"
-          echo "GITEA_REPO=${{ secrets.GITEA_REPO }}"
-          echo "GITEA_USERNAME=${{ secrets.GITEA_USERNAME }}"
+          echo \"GITEA_URL=\${{ secrets.GITEA_URL }}\"
+          echo \"GITEA_TOKEN=\${{ secrets.GITEA_TOKEN }}\"
+          echo \"GITEA_REPO=\${{ secrets.GITEA_REPO }}\"
+          echo \"GITEA_USERNAME=\${{ secrets.GITEA_USERNAME }}\"
 
       - name: Debug - Print environment variables to ensure they're set
         env:
-          GITEA_URL: ${{ secrets.GITEA_URL }}
-          GITEA_TOKEN: ${{ secrets.GITEA_TOKEN }}
-          GITEA_REPO: ${{ secrets.GITEA_REPO }}
-          GITEA_USERNAME: ${{ secrets.GITEA_USERNAME }}
+          GITEA_URL: \${{ secrets.GITEA_URL }}
+          GITEA_TOKEN: \${{ secrets.GITEA_TOKEN }}
+          GITEA_REPO: \${{ secrets.GITEA_REPO }}
+          GITEA_USERNAME: \${{ secrets.GITEA_USERNAME }}
         run: |
-          echo "GITEA_URL=${GITEA_URL}"
-          echo "GITEA_TOKEN=${GITEA_TOKEN}"
-          echo "GITEA_REPO=${GITEA_REPO}"
-          echo "GITEA_USERNAME=${GITEA_USERNAME}"
+          echo \"GITEA_URL=\${GITEA_URL}\"
+          echo \"GITEA_TOKEN=\${GITEA_TOKEN}\"
+          echo \"GITEA_REPO=\${GITEA_REPO}\"
+          echo \"GITEA_USERNAME=\${GITEA_USERNAME}\"
 
       - name: Debug - Construct and print Gitea remote URL
         env:
-          GITEA_URL: ${{ secrets.GITEA_URL }}
-          GITEA_TOKEN: ${{ secrets.GITEA_TOKEN }}
-          GITEA_REPO: ${{ secrets.GITEA_REPO }}
-          GITEA_USERNAME: ${{ secrets.GITEA_USERNAME }}
+          GITEA_URL: \${{ secrets.GITEA_URL }}
+          GITEA_TOKEN: \${{ secrets.GITEA_TOKEN }}
+          GITEA_REPO: \${{ secrets.GITEA_REPO }}
+          GITEA_USERNAME: \${{ secrets.GITEA_USERNAME }}
         run: |
-          GITEA_REMOTE_URL="https://${GITEA_USERNAME}:${GITEA_TOKEN}@${GITEA_URL}/${GITEA_USERNAME}/${GITEA_REPO}.git"
-          echo "Constructed GITEA_REMOTE_URL=${GITEA_REMOTE_URL}"
+          GITEA_REMOTE_URL=\"https://\${GITEA_USERNAME}:\${GITEA_TOKEN}@\${GITEA_URL}/\${GITEA_USERNAME}/\${GITEA_REPO}.git\"
+          echo \"Constructed GITEA_REMOTE_URL=\${GITEA_REMOTE_URL}\"
 
       - name: Add and Push to Gitea
         env:
-          GITEA_URL: ${{ secrets.GITEA_URL }}
-          GITEA_TOKEN: ${{ secrets.GITEA_TOKEN }}
-          GITEA_REPO: ${{ secrets.GITEA_REPO }}
-          GITEA_USERNAME: ${{ secrets.GITEA_USERNAME }}
+          GITEA_URL: \${{ secrets.GITEA_URL }}
+          GITEA_TOKEN: \${{ secrets.GITEA_TOKEN }}
+          GITEA_REPO: \${{ secrets.GITEA_REPO }}
+          GITEA_USERNAME: \${{ secrets.GITEA_USERNAME }}
         run: |
           # Construct the Gitea remote URL
-          GITEA_REMOTE_URL="https://${GITEA_USERNAME}:${GITEA_TOKEN}@${GITEA_URL}/${GITEA_USERNAME}/${GITEA_REPO}.git"
-          echo "GITEA_REMOTE_URL=${GITEA_REMOTE_URL}"
+          GITEA_REMOTE_URL=\"https://\${GITEA_USERNAME}:\${GITEA_TOKEN}@\${GITEA_URL}/\${GITEA_USERNAME}/\${GITEA_REPO}.git\"
+          echo \"GITEA_REMOTE_URL=\${GITEA_REMOTE_URL}\"
 
           # Add the Gitea remote using the constructed URL
-          git remote add gitea $GITEA_REMOTE_URL
+          git remote add gitea \${GITEA_REMOTE_URL}
           
           # Debug: Verify remote
           git remote -v
-          
-          # Fetch only the latest commit from the remote
-          git fetch --depth=1 origin master
 
           # Push the latest commit to the main branch on Gitea
           git push gitea master:main --force
